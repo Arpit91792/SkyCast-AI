@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ClimateGuard - Climate Risk Dashboard</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div id="scroll-progress" aria-hidden="true"></div>
+    <!-- Header -->
+    <header class="header">
+        <div class="hero">
+            <div class="hero-layer" data-depth="0.02"></div>
+            <div class="hero-layer" data-depth="0.06"></div>
+            <div class="container">
+                <h1>🌍 ClimateGuard</h1>
+                <p>AI-Powered Climate Intelligence Platform</p>
+            </div>
+        </div>
+    </header>
+
+    <!-- Navigation -->
+    <nav class="nav">
+        <div class="container">
+            <button class="nav-btn active" onclick="showTab('dashboard')">📊 Dashboard</button>
+            <button class="nav-btn" onclick="showTab('predictions')">🔮 Predictions</button>
+            <button class="nav-btn" onclick="showTab('alerts')">🚨 Alerts</button>
+            <button class="nav-btn" onclick="showTab('regions')">🗺️ Regions</button>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main class="container main-content">
+        
+        <!-- Dashboard Tab -->
+        <div id="dashboard" class="tab-content active">
+            <h2>Climate Risk Dashboard</h2>
+            
+            <div class="stats-grid">
+                <div class="stat-card" data-reveal>
+                    <h3>Regions Monitored</h3>
+                    <div class="stat-value" id="total-regions">0</div>
+                </div>
+                <div class="stat-card warning" data-reveal>
+                    <h3>Active Warnings</h3>
+                    <div class="stat-value" id="active-warnings">0</div>
+                </div>
+                <div class="stat-card success" data-reveal>
+                    <h3>Safe Zones</h3>
+                    <div class="stat-value" id="safe-zones">0</div>
+                </div>
+                <div class="stat-card info" data-reveal>
+                    <h3>Predictions Today</h3>
+                    <div class="stat-value" id="predictions-count">0</div>
+                </div>
+            </div>
+
+            <div class="section">
+                <h3>Recent Predictions</h3>
+                <div id="recent-predictions" class="predictions-list">
+                    <p class="loading">Click "Get Predictions" to view forecasts...</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Predictions Tab -->
+        <div id="predictions" class="tab-content">
+            <h2>Climate Predictions</h2>
+            
+            <div class="prediction-form">
+                <div class="form-group">
+                    <label>Disaster Type:</label>
+                    <select id="disaster-type">
+                        <option value="flood">Flood</option>
+                        <option value="heatwave">Heatwave</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label>Forecast Days:</label>
+                    <input type="number" id="forecast-days" value="7" min="1" max="14">
+                </div>
+
+                <div class="form-group">
+                    <label>Select Regions:</label>
+                    <select id="region-select" class="form-select">
+                        <option value="all">All Regions</option>
+                        <option value="custom" selected>Choose Manually</option>
+                    </select>
+                    <div id="region-checkboxes" class="checkbox-group" style="margin-top:10px;">
+                        <!-- Will be populated dynamically -->
+                    </div>
+                </div>
+
+                <button class="btn btn-primary" onclick="getPredictions()">
+                    🔮 Get Predictions
+                </button>
+            </div>
+
+            <div id="prediction-results" class="prediction-results">
+                <!-- Results will be displayed here -->
+            </div>
+        </div>
+
+        <!-- Alerts Tab -->
+        <div id="alerts" class="tab-content">
+            <h2>Active Climate Alerts</h2>
+            <button class="btn btn-secondary" onclick="loadAlerts()">🔄 Refresh Alerts</button>
+            <div id="alerts-list" class="alerts-list">
+                <p class="loading">Loading alerts...</p>
+            </div>
+        </div>
+
+        <!-- Regions Tab -->
+        <div id="regions" class="tab-content">
+            <h2>Monitored Regions</h2>
+            <div id="regions-list" class="regions-grid">
+                <!-- Will be populated dynamically -->
+            </div>
+        </div>
+
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; 2026 ClimateGuard | Predicting Climate Risks Before They Strike</p>
+        </div>
+    </footer>
+
+    <!-- JavaScript -->
+    <script src="app.js"></script>
+</body>
+</html>
